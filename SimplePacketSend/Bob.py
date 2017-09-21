@@ -1,6 +1,18 @@
 import socketserver
-HOST = 'localhost'
-PORT = 8080
+import sys
+
+def main():
+    print("Running Bob")
+    HOST = 'localhost'
+    PORT = sys.argv[1];
+    startSocketServer(HOST,int(PORT))
+
+
+def startSocketServer(HOST, PORT):
+    with socketserver.TCPServer((HOST, PORT), MyTCPHandler) as server:
+        # Activate the server; this will keep running until you
+        # interrupt the program with Ctrl-C
+        server.serve_forever()
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     """
@@ -19,7 +31,4 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         # just send back the same data, but upper-cased
         self.request.sendall(self.data.upper())
 
-with socketserver.TCPServer((HOST, PORT), MyTCPHandler) as server:
-    # Activate the server; this will keep running until you
-    # interrupt the program with Ctrl-C
-    server.serve_forever()
+main()
