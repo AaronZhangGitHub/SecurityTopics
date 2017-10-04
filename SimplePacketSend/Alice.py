@@ -1,10 +1,25 @@
 import sys
 import socket
 
-main():
-    PORT = int(sys.argv[1])
+def main():
     HOST = 'localhost'
-    sendFilePath = int(sys.argv[2])
-    saveFilePath = int(sys.argv[3])
-
+    PORT = int(sys.argv[1])
+    sendFilePath = sys.argv[2] #File to send to Bob
+    saveFilePath = sys.argv[3] #Path that is saved on Bobs machine
+    client = clientTCPHandler(HOST,PORT,sendFilePath,saveFilePath)
+    client.connect
+    x = str.encode("hello")
+    client.send(x)
+class clientTCPHandler():
+    def __init__(self,host,port,fileToSendPath, targetPath):
+        self.host = host
+        self.port = port
+        self.fileToSendPath = fileToSendPath
+        self.targetPath = targetPath
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    def connect(self):
+        print("Connecting ")
+        self.sock.connect((host,port))
+    def send(self, message):
+        self.sock.send(message)
 main()
