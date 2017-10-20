@@ -14,7 +14,6 @@ def testFiles(jsonTestCaseRep, filesToTest):
     for file in filesToTest:
         passAllCases = True
         studentOnyen = file.split('_')
-        print(studentOnyen[1])
         for test in tests:
             arg1 = test['inputArg1']
             arg2 = test['inputArg2']
@@ -23,7 +22,7 @@ def testFiles(jsonTestCaseRep, filesToTest):
             if outputVal!=expectedOutput:
                 passAllCases = False
                 break
-        print(passAllCases)
+        print("%s Statues: %s" % (studentOnyen[1],passAllCases)) #this will late output information to a file
 
 def readJsonFile(fileName):
     with open(fileName) as json_data:
