@@ -1,6 +1,7 @@
 import json
 import os
 import hashlib
+import subprocess
 
 STUDENT_FILES = "./StudentFiles_collision"
 def main():
@@ -9,9 +10,10 @@ def main():
 
 def testFilesCollision(filesToRun):
     for fileName in filesToRun:
-        timeout = time.time() + 20
+        print(fileName)
         studentOnyen = fileName.split('_')
         hashVals = getHashValues(fileName)
+        print(hashVals)
         hashToSameValue_first24Bits = collisionTest(hashVals[0],hashVals[1])
         print("%s %s"%(studentOnyen[1],hashToSameValue_first24Bits))
 
